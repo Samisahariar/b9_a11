@@ -3,9 +3,10 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import auth from "../../../firebase.config";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { GithubAuthProvider } from "firebase/auth";
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 
 
-
+const queryClient = new QueryClient();
 export const AuthCon = createContext();
 
 const AuthContext = ({ children }) => {
@@ -13,8 +14,8 @@ const AuthContext = ({ children }) => {
     const [loader, setLoader] = useState(true);
 
 
-    useEffect( () =>{
-        const unsubscribe = onAuthStateChanged(auth, currentUser =>{
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             setLoader(false);
         })
@@ -54,11 +55,14 @@ const AuthContext = ({ children }) => {
 
     const name = "sami"
 
-    const authinfo = { user,name,  setUser, loader, createUser, gitlogin, googlelogin, logOut, signIn }
+    const authinfo = { user, name, setUser, loader, createUser, gitlogin, googlelogin, logOut, signIn }
     return (
-        <AuthCon.Provider value={authinfo}>
-            {children}
-        </AuthCon.Provider>
+        <QueryClientProvider client={queryClient}>
+            <AuthCon.Provider value={authinfo}>
+                {children}
+            </AuthCon.Provider>
+        </QueryClientProvider>
+
     );
 };
 
