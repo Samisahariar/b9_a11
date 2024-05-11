@@ -1,10 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import signupImage from "../../images/signupimage.png"
-
-
+import { useContext } from "react";
+import { AuthCon } from "../authcontext/AuthContext";
+import { updateProfile } from "firebase/auth";
+import auth from "../../../firebase.config";
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const navigate = useNavigate();
+
+    const { createUser, logOut } = useContext(AuthCon);
 
     const handletheregister = (event) => {
         event.preventDefault();
@@ -14,16 +19,55 @@ const Register = () => {
         const photo = form.photo_URL.value;
         const password = form.password.value;
         console.log(username, email, photo, password)
+        createUser(email, password)
+            .then(res => {
+                const user = res.user;
+                updateProfile(auth.currentUser, {
+                    displayName: username,
+                    photoURL: photo
+                }).then(() => {
+                    logOut()
+                        .then(res => {
+                            setTimeout(
+                                () => {
+                                    tohomepage()
+                                }
+                                , 2000)
+                            Swal.fire({
+                                position: "middle",
+                                icon: "success",
+                                title: "Registration Successfull!!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+
+                        })
+                        .catch(error => console.log(error))
+                })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: `${error.message}`,
+                            footer: '<a href="#">Why do I have this issue?</a>'
+                        });
+                    })
+            })
     }
 
     const tothelogin = () => {
         navigate("/")
     }
+
+    const tohomepage = () =>{
+        navigate('/main/home')
+    }
+
     return (
         <div className="flex px-[10%] mx-auto border border-black justify-between py-[5%]">
             <div className="w-[50%] p-2">
                 <div className="mb-5">
-                    <h3 className="text-5xl mb-3 font-semibold">Register Here</h3>
+                    <h3 className="text-5xl mb-3 font-semibold">Register Here {name}</h3>
                     <hr className="w-[40%] border-2 border-green-400" />
                 </div>
                 <form className="max-w-md " onSubmit={handletheregister}>

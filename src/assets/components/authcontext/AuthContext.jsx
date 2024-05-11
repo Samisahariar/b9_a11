@@ -52,8 +52,9 @@ const AuthContext = ({ children }) => {
         return signInWithPopup(auth, providergit)
     }
 
+    const name = "sami"
 
-    const authinfo = { user, setUser, loader, createUser, gitlogin, googlelogin, logOut, signIn }
+    const authinfo = { user,name,  setUser, loader, createUser, gitlogin, googlelogin, logOut, signIn }
     return (
         <AuthCon.Provider value={authinfo}>
             {children}

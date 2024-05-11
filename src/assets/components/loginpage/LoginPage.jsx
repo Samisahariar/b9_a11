@@ -2,12 +2,13 @@ import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 import "../../../App.css"
 import { Typewriter } from 'react-simple-typewriter'
-import { Navigate, useNavigate } from "react-router-dom";
-import { NavbarToggle } from "flowbite-react";
-
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import Swal from 'sweetalert2';
+import { AuthCon } from "../authcontext/AuthContext";
 
 const LoginPage = () => {
-
+    const { signIn, setUser } = useContext(AuthCon);
     const navigate = useNavigate();
     const [sliderRef] = useKeenSlider(
         {
@@ -51,14 +52,26 @@ const LoginPage = () => {
         const email = form.email.value;
         const password = form.password.value;
         const checked = form.checkbox.checked;
-        console.log(email, password, checked)
+        if (checked) {
+            signIn(email, password)
+                .then(res => {
+                    setUser(res.user);
+                    Swal.fire({
+                        position: "middle",
+                        icon: "success",
+                        title: "Login Successfull!!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                })
+        }
     }
 
 
     const tothemain = () => {
         navigate('/main/home')
     }
-    const totheregister = () =>{
+    const totheregister = () => {
         navigate('/register')
     }
 
