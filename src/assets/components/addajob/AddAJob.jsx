@@ -22,7 +22,7 @@ const AddAJob = () => {
         const salary = form.salary.value;
         const jobpostingdate = form.jobpostingdate.value;
         const deadline = form.deadline.value;
-        const applicantnumber = form.applicantnumber.value;
+        const applicantnumber = parseInt(form.applicantnumber.value);
         const description = form.description.value;
         const jobinfo = {photo, jobtitle, username, email, salary, jobpostingdate, deadline, applicantnumber, description}
         axioussecure.post('/addjob', jobinfo)

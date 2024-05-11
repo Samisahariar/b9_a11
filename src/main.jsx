@@ -15,6 +15,7 @@ import AppliedJobs from './assets/components/appliedJobs/AppliedJobs.jsx';
 import Blogs from './assets/components/blogs/Blogs.jsx';
 import Register from './assets/components/register/Register.jsx';
 import AuthContext from './assets/components/authcontext/AuthContext.jsx';
+import JobDetails from './assets/components/jobdetails/JobDetails.jsx';
 
 
 
@@ -39,6 +40,11 @@ const router = createBrowserRouter([
       {
         path: "alljobs",
         element: <AllJobs></AllJobs>
+      },
+      {
+        path: "alljobs/:id",
+        element: <JobDetails></JobDetails>,
+        loader: ({params}) => params.id 
       },
       {
         path: "myjobs",

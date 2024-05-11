@@ -25,7 +25,7 @@ const Navbar = () => {
                 : "inactive"
         }
         >Home</NavLink>
-        <NavLink to="alljobs" className={({ isActive, isPending }) =>
+        <NavLink id="alljobs" to="alljobs" className={({ isActive, isPending }) =>
             isActive
                 ? "active"
                 : "inactive"

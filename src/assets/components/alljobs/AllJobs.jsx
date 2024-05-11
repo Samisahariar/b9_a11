@@ -60,7 +60,6 @@ const AllJobs = () => {
                         }
                     </select>
                 </form>
-
             </div>
             <table className="table table-zebra mt-[5%]">
                 {/* head */}

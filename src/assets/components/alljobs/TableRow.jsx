@@ -1,11 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
 const TableRow = ({ singleRow, number }) => {
     console.log(singleRow)
 
     const {
-        jobtitle, jobpostingdate, deadline, salary, _id } = singleRow
+        jobtitle, jobpostingdate, deadline, salary, _id } = singleRow;
+
+    const handletoremove = () =>{
+        console.log("sami")
+        document.getElementById("alljobs").classList.add("inactive");
+    }
 
     return (
         <tr>
@@ -14,7 +19,7 @@ const TableRow = ({ singleRow, number }) => {
             <td>{jobpostingdate}</td>
             <td>{deadline}</td>
             <td>{salary}</td>
-            <td><Link to={`/alljobs/${_id}`}><span>View Details</span></Link></td>
+            <NavLink to={`/main/alljobs/${_id}`} onClick={handletoremove}><span>View Details</span></NavLink>
         </tr>
     );
 };
