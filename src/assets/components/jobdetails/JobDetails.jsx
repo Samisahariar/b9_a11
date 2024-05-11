@@ -14,7 +14,6 @@ const fetchdata = async (params) => {
     if (fetchdata) {
         return fetchdata.json()
     }
-
 }
 
 const JobDetails = () => {
@@ -55,7 +54,7 @@ const JobDetails = () => {
         return <span className="loading loading-infinity loading-lg"></span>
     }
 
-    
+
     return (
         <div>
             <ToastContainer />

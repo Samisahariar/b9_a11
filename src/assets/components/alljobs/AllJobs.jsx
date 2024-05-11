@@ -24,7 +24,7 @@ const AllJobs = () => {
 
     /* const queryCache = new QueryCache() */
 
-    const { isPending, data } = useQuery({
+    const { isPending, data, refetch } = useQuery({
         queryKey: ['todos'],
         queryFn: fetchdata
     })
@@ -40,9 +40,8 @@ const AllJobs = () => {
     const handlethesubmit = (event) => {
         event.preventDefault();
         const params = event.target.value
-        /* fetchdatawithparams.mutate(params); */
+        
     }
-
 
 
     return (

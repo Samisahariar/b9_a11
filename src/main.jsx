@@ -48,7 +48,7 @@ const router = createBrowserRouter([
       },
       {
         path: "myjobs",
-        element: <MyJob></MyJob>
+        element: <MyJob></MyJob>,
       },
       {
         path: "addajob",
