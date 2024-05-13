@@ -32,21 +32,20 @@ const JobDetails = () => {
     const handlethesublit = (e) => {
         e.preventDefault()
         const form = e.target;
-        const resume = form.resume.value;
-        const data = {
-            email: user?.email,
-            job_ID: id,
-            resume: resume
-        }
+        const resume = form.resume.target;
 
-        axioussecure.post('/appliedjobs', data)
+        axioussecure.put(`/appliedjobs`, { job_ID : id, resume : resume, email : user?.email })
             .then(res => {
+                if(res.data.message){
+                    toast.error(res.data.message);
+                }
                 if (res.data.acknowledged) {
+                    
                     toast("Sunmission is succesfull!!")
                 }
             })
             .catch(error => {
-                console.log(error.message)
+                console.log(error)
             })
     }
 
@@ -58,7 +57,7 @@ const JobDetails = () => {
     return (
         <div>
             <ToastContainer />
-            <h3>{data.jobtitle}</h3>
+            <h3>{data?.jobtitle}</h3>
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
             <button className="btn" onClick={() => document.getElementById('my_modal_3').showModal()}>open modal</button>
             <dialog id="my_modal_3" className="modal">

@@ -12,7 +12,7 @@ const useAxiousSecure = () => {
     axioussecure.interceptors.response.use(res =>{
         return res
     }, error =>{
-        console.log("error in the axious interceptor", error.response)
+        console.log("error in the axious interceptor", error.response.status)
     })
    }, [])
 
