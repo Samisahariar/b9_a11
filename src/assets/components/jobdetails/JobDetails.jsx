@@ -18,7 +18,6 @@ const fetchdata = async (params) => {
 
 const JobDetails = () => {
 
-
     const { user } = useContext(AuthCon);
     const axioussecure = useAxiousSecure();
     const { id } = useParams();
@@ -33,20 +32,27 @@ const JobDetails = () => {
         e.preventDefault()
         const form = e.target;
         const resume = form.resume.target;
+        const deadline = new Date(data?.deadline);
+        const deadtime = deadline.getTime();
+        const currentTime = Date.now();
+        if (currentTime > deadtime) {
+            axioussecure.put(`/appliedjobs`, { job_ID: id, resume: resume, email: user?.email })
+                .then(res => {
+                    if (res.data.message) {
+                        toast.error(res.data.message);
+                    }
+                    if (res.data.acknowledged) {
 
-        axioussecure.put(`/appliedjobs`, { job_ID : id, resume : resume, email : user?.email })
-            .then(res => {
-                if(res.data.message){
-                    toast.error(res.data.message);
-                }
-                if (res.data.acknowledged) {
-                    
-                    toast("Sunmission is succesfull!!")
-                }
-            })
-            .catch(error => {
-                console.log(error)
-            })
+                        toast("Sunmission is succesfull!!")
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }else{
+            toast("Dead LIne is OVer")
+        }
+
     }
 
     if (isPending) {
