@@ -20,7 +20,7 @@ const MyJob = () => {
     })
 
     if (isPending && user) {
-        return <span className="loading loading-infinity loading-lg"></span>
+        return <div className="w-[100%] h-[100vh] flex justify-center items-center"><span className="loading loading-infinity loading-lg"></span></div>
     } else {
         return (
             <div>

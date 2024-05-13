@@ -34,7 +34,7 @@ const AllJobs = () => {
     }) */
 
     if (isPending) {
-        return <span className="loading loading-infinity loading-lg"></span>
+        return <div className="w-[100%] h-[100vh] flex justify-center items-center"><span className="loading loading-infinity loading-lg"></span></div>
     }
 
     const handlethesubmit = (event) => {
