@@ -19,10 +19,10 @@ const MyJob = () => {
         queryKey: [user?.email],
         queryFn: fetchdata
     })
-
+/* 
     const handletheupdatebutton = () =>{
-        
-    }
+
+    } */
 
 
 

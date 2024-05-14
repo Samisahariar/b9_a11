@@ -4,17 +4,13 @@ import { FaHammer } from "react-icons/fa";
 import { MdEditSquare } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 
 const SingleCard = ({ singledatamyjob }) => {
     const navigate = useNavigate();
-    const {applicantnumber, deadline, jobpostingdate, jobtitle, photo, salary, _id} = singledatamyjob;
-
-    const handleTheEditButton = () =>{
-        
-    }
-
+    const { applicantnumber, deadline, jobpostingdate, jobtitle, photo, salary, _id } = singledatamyjob;
 
 
 
@@ -40,7 +36,7 @@ const SingleCard = ({ singledatamyjob }) => {
 
                 </div>
                 <div className="join join-vertical gap-1">
-                    <button className="btn text-xl dark:bg-[#378CE7] bg-[]" /* onClick={() => handlededitbutton(_id)} */><MdEditSquare /></button>
+                    <NavLink to={`/main/update/${_id}`}><span>View Details</span></NavLink>
                     <button className="btn text-xl" /* onClick={() => handledelbutton(_id)} */><MdDeleteForever /></button>
                     <button className="btn text-xl" /* onClick={() => tothecarddetails(_id)} */><CgDetailsMore /></button>
                 </div>
