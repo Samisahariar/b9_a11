@@ -17,10 +17,11 @@ const fetchdata = async (params) => {
 const AppliedJobs = () => {
 
     const [data, setdata] = useState();
+    const [filterdata, setfilterdata] = useState();
     const axioussecure = useAxiousSecure();
     const { email } = useParams();
 
-    useEffect(() => {
+    /* useEffect(() => {
         axioussecure(`http://localhost:5000/appliedJobPage/${email}`)
             .then(res => {
                 setdata(res.data)
@@ -28,12 +29,33 @@ const AppliedJobs = () => {
             .catch(error => {
                 alert(error.message)
             })
-    }, [])
+    }, []) */
 
-    const handlethesubmit = (event) =>{
+    const { isPending } = useQuery({
+        queryFn: async () => {
+            axioussecure(`http://localhost:5000/appliedJobPage/${email}`)
+                .then(res => {
+                    setdata(res.data)
+                })
+                .catch(error => {
+                    alert(error.message)
+                })
+        }
+    })
+
+    const handlethesubmit = (event) => {
         event.preventDefault();
         const jobtitle = event.target.value;
-        
+        if (jobtitle !== "All") {
+            const filterdata = data.filter((singledata) => singledata.jobtitle === jobtitle)
+            setfilterdata(filterdata)
+        } else {
+            setfilterdata(data)
+        }
+    }
+    
+    if (isPending) {
+        return <div className="w-[100%] h-[100vh] flex justify-center items-center"><span className="loading loading-infinity loading-lg"></span></div>
     }
 
 
@@ -55,7 +77,7 @@ const AppliedJobs = () => {
             <div className=" grid md:grid-cols-2 grid-cols-1 px-[10%] gap-2">
 
                 {
-                    data?.map((singleCard, idx) => <SingleCardJ singleCard={singleCard} key={idx}></SingleCardJ>)
+                    filterdata ? filterdata?.map((singleCard, idx) => <SingleCardJ singleCard={singleCard} key={idx}></SingleCardJ>) : data?.map((singleCard, idx) => <SingleCardJ singleCard={singleCard} key={idx}></SingleCardJ>)
                 }
             </div>
         </>

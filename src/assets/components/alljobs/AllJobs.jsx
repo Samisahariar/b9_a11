@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import TableRow from "./TableRow";
 import { useState } from "react";
 import useAxiousSecure from "../hooks/useAxiousSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const fetchdata = async (params) => {
     const fetchdata = await fetch('http://localhost:5000/alljobs')
@@ -18,11 +19,10 @@ const fetchdata = async (params) => {
 
 
 const AllJobs = () => {
-    const [loader, setLoader] = useState(true);
     const [alldata, setalldata] = useState()
-    const axioussecure =  useAxiousSecure();
+    const axioussecure = useAxiousSecure();
     /* const queryCache = new QueryCache() */
-    useEffect(() => {
+    /* useEffect(() => {
         axioussecure.get('/alljobs')
         .then(res => {
             setalldata(res.data)
@@ -31,17 +31,32 @@ const AllJobs = () => {
         .catch(error =>{
             console.log(error.message)
         })
-    }, [])
-    
-    if(loader){
-        return  <div className="w-[100%] h-[100vh] flex justify-center items-center"><span className="loading loading-infinity loading-lg"></span></div>
+    }, []) */
+
+    const { isPending } = useQuery({
+        queryFn: async () => {
+            axioussecure.get('/alljobs')
+                .then(res => {
+                    setalldata(res.data)
+                    /* setLoader(false) */
+                })
+                .catch(error => {
+                    console.log(error.message)
+                })
+        }
+    })
+
+
+
+    if (isPending) {
+        return <div className="w-[100%] h-[100vh] flex justify-center items-center"><span className="loading loading-infinity loading-lg"></span></div>
     }
 
 
     return (
         <div className="overflow-x-auto dark:bg-base-200 bg-white lg:px-[10%] md:px-[5%] px-[2%]">
             <h3 className="text-4xl text-center dark:text-white text-black mt-[2%]">All the items are <span className="text-[#FF204E] dark:text-[#378CE7]">listed below</span></h3>
-            
+
             <table className="table table-zebra mt-[5%]">
                 {/* head */}
                 <thead>
