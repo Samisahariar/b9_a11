@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import useAxiousSecure from "../hooks/useAxiousSecure";
-import Swal from 'sweetalert2';
+
 
 
 
@@ -13,7 +13,7 @@ const Update = () => {
     const { user } = useContext(AuthCon);
     const [startDate, setStartDate] = useState(new Date());
     const { id } = useParams();
-    const axioussecure = useAxiousSecure();
+  
 
     const handletheupdate = (event) => {
         event.preventDefault();
@@ -29,13 +29,19 @@ const Update = () => {
         const applicantnumber = parseInt(form.applicantnumber.value);
         const description = form.description.value;
         const updatedjobinfo = { jobcategory, photo, jobtitle, username, email, salary, jobpostingdate, deadline, applicantnumber, description }
-        axioussecure.put(`/updated/${id}`, updatedjobinfo)
-        .then(res => {
-            console.log(res.data)
+        fetch(`http://localhost:5000/updatepage/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedjobinfo)
         })
-        .catch(error => {
-            console.log(error.message)
-        })
+            .then(res => {
+                console.log(res)
+            })
+            .then(error =>{
+                console.log(error)
+            })
     }
 
 
