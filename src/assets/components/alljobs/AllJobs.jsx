@@ -1,10 +1,9 @@
-import { useState } from "react";
-import { QueryCache, useMutation, useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import TableRow from "./TableRow";
-
+import { useState } from "react";
+import useAxiousSecure from "../hooks/useAxiousSecure";
 
 const fetchdata = async (params) => {
-    console.log(params)
     const fetchdata = await fetch('http://localhost:5000/alljobs')
     if (fetchdata) {
         if (params.meta == undefined) {
@@ -19,18 +18,23 @@ const fetchdata = async (params) => {
 
 
 const AllJobs = () => {
-
+    const [loader, setLoader] = useState(true);
+    const [alldata, setalldata] = useState()
+    const axioussecure =  useAxiousSecure();
     /* const queryCache = new QueryCache() */
-
-    const { isPending, data, refetch } = useQuery({
-        queryKey: ['todos'],
-        queryFn: fetchdata
-    })
-
+    useEffect(() => {
+        axioussecure.get('/alljobs')
+        .then(res => {
+            setalldata(res.data)
+            setLoader(false)
+        })
+        .catch(error =>{
+            console.log(error.message)
+        })
+    }, [])
     
-
-    if (isPending) {
-        return <div className="w-[100%] h-[100vh] flex justify-center items-center"><span className="loading loading-infinity loading-lg"></span></div>
+    if(loader){
+        return  <div className="w-[100%] h-[100vh] flex justify-center items-center"><span className="loading loading-infinity loading-lg"></span></div>
     }
 
 
@@ -53,7 +57,7 @@ const AllJobs = () => {
                 <tbody>
                     {/* row 1 */}
                     {
-                        data?.map((singleRow, idx) => <TableRow key={idx} singleRow={singleRow} number={idx}></TableRow>)
+                        alldata?.map((singleRow, idx) => <TableRow key={idx} singleRow={singleRow} number={idx}></TableRow>)
                     }
                 </tbody>
             </table>

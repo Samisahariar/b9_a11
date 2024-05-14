@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import useAxiousSecure from "../hooks/useAxiousSecure";
-
+import Swal from 'sweetalert2';
 
 
 
@@ -13,7 +13,6 @@ const Update = () => {
     const { user } = useContext(AuthCon);
     const [startDate, setStartDate] = useState(new Date());
     const { id } = useParams();
-  
 
     const handletheupdate = (event) => {
         event.preventDefault();
@@ -37,7 +36,13 @@ const Update = () => {
             body: JSON.stringify(updatedjobinfo)
         })
             .then(res => {
-                console.log(res)
+                Swal.fire({
+                    position: "middle",
+                    icon: "success",
+                    title: "Update is Successfull!!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             })
             .then(error =>{
                 console.log(error)

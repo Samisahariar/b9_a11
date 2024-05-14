@@ -7,10 +7,6 @@ const TableRow = ({ singleRow, number }) => {
     const {
         jobtitle, jobpostingdate, deadline, salary, _id } = singleRow;
 
-    const handletoremove = () =>{
-        console.log("sami")
-        document.getElementById("alljobs").classList.add("inactive");
-    }
 
     return (
         <tr>
@@ -19,7 +15,7 @@ const TableRow = ({ singleRow, number }) => {
             <td>{jobpostingdate}</td>
             <td>{deadline}</td>
             <td>{salary}</td>
-            <NavLink to={`/main/alljobs/${_id}`} onClick={handletoremove}><span>View Details</span></NavLink>
+            <NavLink to={`/main/jobdetails/${_id}`}><span>View Details</span></NavLink>
         </tr>
     );
 };

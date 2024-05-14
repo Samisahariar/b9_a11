@@ -8,15 +8,15 @@ import { NavLink } from "react-router-dom";
 
 
 
-const SingleCard = ({ singledatamyjob }) => {
-    const navigate = useNavigate();
+const SingleCard = ({ singledatamyjob, handledelbutton }) => {
+
     const { applicantnumber, deadline, jobpostingdate, jobtitle, photo, salary, _id } = singledatamyjob;
 
 
 
     return (
         <div className="card card-side dark:bg-base-100  cursor-pointer bg-white text-black shadow-xl dark:text-white">
-            <div className="w-[40%]"><img src="photo" alt="Movie" className="rounded-xl bg-cover" /></div>
+            <div className="w-[40%]"><img src={photo} alt="Movie" className="rounded-xl bg-cover" /></div>
             <div className=" flex justify-between w-[60%] items-center">
                 <div className=" space-y-1 p-1">
                     <h2 className="text-xl font-semibold">{jobtitle}</h2>
@@ -37,7 +37,7 @@ const SingleCard = ({ singledatamyjob }) => {
                 </div>
                 <div className="join join-vertical gap-1">
                     <NavLink to={`/main/update/${_id}`}><span>View Details</span></NavLink>
-                    <button className="btn text-xl" /* onClick={() => handledelbutton(_id)} */><MdDeleteForever /></button>
+                    <button className="btn text-xl" onClick={() => handledelbutton(_id)}><MdDeleteForever /></button>
                     <button className="btn text-xl" /* onClick={() => tothecarddetails(_id)} */><CgDetailsMore /></button>
                 </div>
             </div>
