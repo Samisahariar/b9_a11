@@ -3,7 +3,8 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import auth from "../../../firebase.config";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { GithubAuthProvider } from "firebase/auth";
-import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider  } from "@tanstack/react-query";
+import useAxiousSecure from "../hooks/useAxiousSecure";
 
 
 const queryClient = new QueryClient();
@@ -12,12 +13,26 @@ export const AuthCon = createContext();
 const AuthContext = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loader, setLoader] = useState(true);
+    const axioussecure = useAxiousSecure();
 
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            const usrEmail = currentUser?.email || user?.email;
+            const loggedUser = { email: usrEmail }
             setUser(currentUser);
             setLoader(false);
+            if (currentUser) {
+                axioussecure.post('/jwt', loggedUser)
+                    .then(res => {
+                        console.log(res.data)
+                    })
+            } else {
+                axioussecure.post('/logout', loggedUser)
+                    .then(res => {
+                        console.log(res.data)
+                    })
+            }
         })
         return () => {
             unsubscribe()

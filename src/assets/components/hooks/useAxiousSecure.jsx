@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 
 const axioussecure = axios.create({
@@ -12,7 +12,9 @@ const useAxiousSecure = () => {
     axioussecure.interceptors.response.use(res =>{
         return res
     }, error =>{
-        console.log("error in the axious interceptor", error.response.status)
+        if(error.response.status === 401 || error.response.status === 403){
+            console.log("error in the interceptor!!!")
+        }
     })
    }, [])
 

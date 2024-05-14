@@ -13,8 +13,6 @@ const fetchdata = async (params) => {
     }
 }
 
-
-
 const AppliedJobs = () => {
 
     const { email } = useParams();
@@ -23,6 +21,13 @@ const AppliedJobs = () => {
         queryKey: [email],
         queryFn: fetchdata
     })
+
+    /* const fetchdatawithparams = useMutation({
+            mutationFn: (params) => fetchdata(params),
+        }) */
+
+
+
 
     if (isPending) {
         return <div className="w-[100%] h-[100vh] flex justify-center items-center"><span className="loading loading-infinity loading-lg"></span></div>

@@ -20,6 +20,7 @@ const AddAJob = () => {
         const form = event.target;
         const photo = form.photo.value;
         const jobtitle = form.jobtitle.value;
+        const jobcategory = form.jobcategory.value;
         const username = form.username.value;
         const email = form.email.value;
         const salary = form.salary.value;
@@ -27,7 +28,7 @@ const AddAJob = () => {
         const deadline = form.deadline.value;
         const applicantnumber = parseInt(form.applicantnumber.value);
         const description = form.description.value;
-        const jobinfo = { photo, jobtitle, username, email, salary, jobpostingdate, deadline, applicantnumber, description }
+        const jobinfo = { jobcategory, photo, jobtitle, username, email, salary, jobpostingdate, deadline, applicantnumber, description }
 
         axioussecure.post('/addjob', jobinfo)
             .then(res => {

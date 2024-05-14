@@ -16,6 +16,7 @@ import Blogs from './assets/components/blogs/Blogs.jsx';
 import Register from './assets/components/register/Register.jsx';
 import AuthContext from './assets/components/authcontext/AuthContext.jsx';
 import JobDetails from './assets/components/jobdetails/JobDetails.jsx';
+import Update from './assets/components/updatepage/Update.jsx';
 
 
 
@@ -63,6 +64,11 @@ const router = createBrowserRouter([
         path: "blogs",
         element: <Blogs></Blogs>
       },
+      {
+        path: "update/:id",
+        element: <Update></Update>,
+        loader: ({ params }) => params.id
+      }
 
     ]
   }
