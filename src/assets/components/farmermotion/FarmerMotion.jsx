@@ -16,7 +16,7 @@ const FarmerMotion = () => {
     });
 
     return (
-        <div className="container1">
+        <div className="container1 pt-[8%] px-[10%] h-[50vh]">
             <div className="cube" ref={ref}>
                 <div className="side front" />
                 <div className="side left" />
