@@ -17,6 +17,7 @@ import Register from './assets/components/register/Register.jsx';
 import AuthContext from './assets/components/authcontext/AuthContext.jsx';
 import JobDetails from './assets/components/jobdetails/JobDetails.jsx';
 import Update from './assets/components/updatepage/Update.jsx';
+import Private from './assets/components/private/Private.jsx';
 
 
 
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
       },
       {
         path: "myjobs",
-        element: <MyJob></MyJob>,
+        element: <Private><MyJob></MyJob></Private>,
       },
       {
         path: "addajob",
@@ -57,7 +58,7 @@ const router = createBrowserRouter([
       },
       {
         path: "appliedjobs/:email",
-        element: <AppliedJobs></AppliedJobs>,
+        element: <Private><AppliedJobs></AppliedJobs></Private>,
         loader: ({ params }) => params.email
       },
       {

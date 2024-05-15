@@ -76,7 +76,7 @@ const MyJob = () => {
                     <tr>
                         <th></th>
                         <th>jobtitle</th>
-                        <th>jobpostingdate</th>
+                        <th>applicant number</th>
                         <th>deadline</th>
                         <th>salary</th>
                         <th></th>
@@ -85,7 +85,7 @@ const MyJob = () => {
                 <tbody>
                     {/* row 1 */}
                     {
-                        userData?.map((singleRow, idx) => <TableRowOfMyJob key={idx} singleRow={singleRow} number={idx}></TableRowOfMyJob>)
+                        userData?.map((singleRow, idx) => <TableRowOfMyJob key={idx} singleRow={singleRow} number={idx} handledelbutton={handledelbutton}></TableRowOfMyJob>)
                     }
                 </tbody>
             </table>

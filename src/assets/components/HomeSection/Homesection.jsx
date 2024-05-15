@@ -1,3 +1,4 @@
+import FarmerMotion from "../farmermotion/FarmerMotion";
 import HomeTabSection from "../tabs/HomeTabSection";
 import Banner from "./Banner";
 
@@ -6,6 +7,7 @@ const Homesection = () => {
         <div>
            <Banner></Banner>
            <HomeTabSection></HomeTabSection>
+           <FarmerMotion></FarmerMotion>
         </div>
     );
 };

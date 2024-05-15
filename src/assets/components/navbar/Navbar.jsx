@@ -31,7 +31,7 @@ const Navbar = () => {
                 : "inactive"
         }
         >All Jobs</NavLink>
-        <NavLink to={user ? `appliedjobs/${user.email}` : ""} className={({ isActive, isPending }) =>
+        <NavLink to={user ? `appliedjobs/${user.email}` : "/"} className={({ isActive, isPending }) =>
             isActive
                 ? "active"
                 : "inactive"
