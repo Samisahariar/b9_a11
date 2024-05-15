@@ -1,4 +1,4 @@
-
+import { motion } from "framer-motion";
 
 const SingleCardHome = ({ singledatamyjob }) => {
 
@@ -8,7 +8,9 @@ const SingleCardHome = ({ singledatamyjob }) => {
 
 
     return (
-        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <motion.div whileHover={{ scale: 1.1 }}
+            onHoverStart={e => { }}
+            onHoverEnd={e => {}} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
                 <img className="rounded-t-lg" src={photo} alt="" />
             </a>
@@ -24,7 +26,7 @@ const SingleCardHome = ({ singledatamyjob }) => {
                     </svg>
                 </a>
             </div>
-        </div>
+        </motion.div>
 
     )
 };

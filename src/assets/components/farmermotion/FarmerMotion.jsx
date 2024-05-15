@@ -1,15 +1,31 @@
 import { motion } from "framer-motion"
+import { useAnimationFrame } from "framer-motion";
+import { useRef } from "react";
+import "../../../App.css"
+
+
 
 
 const FarmerMotion = () => {
+    const ref = useRef(null);
+
+    useAnimationFrame((t) => {
+        const rotate = Math.sin(t / 10000) * 200;
+        const y = (1 + Math.sin(t / 1000)) * -50;
+        ref.current.style.transform = `translateY(${y}px) rotateX(${rotate}deg) rotateY(${rotate}deg)`;
+    });
+
     return (
-        <motion.div
-            animate={{
-                scale: [1, 2, 2, 1, 1],
-                rotate: [0, 0, 270, 270, 0],
-                borderRadius: ["20%", "20%", "50%", "50%", "20%"],
-            }}
-         className="w-[100%] h-[20vh]"/>
+        <div className="container1">
+            <div className="cube" ref={ref}>
+                <div className="side front" />
+                <div className="side left" />
+                <div className="side right" />
+                <div className="side top" />
+                <div className="side bottom" />
+                <div className="side back" />
+            </div>
+        </div>
     );
 };
 
