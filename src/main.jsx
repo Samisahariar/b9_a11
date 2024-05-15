@@ -18,6 +18,7 @@ import AuthContext from './assets/components/authcontext/AuthContext.jsx';
 import JobDetails from './assets/components/jobdetails/JobDetails.jsx';
 import Update from './assets/components/updatepage/Update.jsx';
 import Private from './assets/components/private/Private.jsx';
+import ErrorJsx from './assets/components/errorelement/ErrorJsx.jsx';
 
 
 
@@ -25,10 +26,12 @@ import Private from './assets/components/private/Private.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LoginPage></LoginPage>,
+    errorElement: <ErrorJsx></ErrorJsx>,
+    element: <LoginPage></LoginPage>
   },
   {
     path: "/register",
+    
     element: <Register></Register>
   },
   {
@@ -45,7 +48,7 @@ const router = createBrowserRouter([
       },
       {
         path: "jobdetails/:id",
-        element: <JobDetails></JobDetails>,
+        element: <Private><JobDetails></JobDetails></Private>,
         loader: ({ params }) => params.id
       },
       {
@@ -54,7 +57,7 @@ const router = createBrowserRouter([
       },
       {
         path: "addajob",
-        element: <AddAJob></AddAJob>
+        element: <Private><AddAJob></AddAJob></Private>
       },
       {
         path: "appliedjobs/:email",

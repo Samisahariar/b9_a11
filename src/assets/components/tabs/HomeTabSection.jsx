@@ -52,8 +52,9 @@ const HomeTabSection = () => {
     }
 
     return (
-        <div className='px-[15%]'>
-            <Tabs>
+        <div className='px-[15%] mt-10'>
+            <h3 className='text-4xl font-semibold text-center'>Available Jobs Are Here</h3>
+            <Tabs className="mt-10">
                 <TabList>
                     <Tab onClick={() => fecthdifferentCat("On-Site Job")}>On-Site Job</Tab>
                     <Tab onClick={() => fecthdifferentCat("Remote Job")}>Remote Job</Tab>
@@ -61,7 +62,7 @@ const HomeTabSection = () => {
                     <Tab onClick={() => fecthdifferentCat("Part-Time")}>Part-Time</Tab>
                 </TabList>
             </Tabs>
-            <div className='grid md:grid-cols-2 lg:grid-cols-3 px-[5%] gap-2'>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-2'>
                 {
                     data?.map((singledatamyjob, idx) => <SingleCardHome singledatamyjob={singledatamyjob} key={idx}></SingleCardHome>)
                 }

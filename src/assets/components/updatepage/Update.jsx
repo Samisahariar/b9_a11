@@ -28,7 +28,7 @@ const Update = () => {
         const applicantnumber = parseInt(form.applicantnumber.value);
         const description = form.description.value;
         const updatedjobinfo = { jobcategory, photo, jobtitle, username, email, salary, jobpostingdate, deadline, applicantnumber, description }
-        fetch(`http://localhost:5000/updatepage/${id}`, {
+        fetch(`https://b9a11-server-site.vercel.app/updatepage/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

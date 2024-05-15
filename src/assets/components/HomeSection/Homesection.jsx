@@ -1,3 +1,4 @@
+import Accordian from "../accordian/Accordian";
 import FarmerMotion from "../farmermotion/FarmerMotion";
 import HomeTabSection from "../tabs/HomeTabSection";
 import Banner from "./Banner";
@@ -20,6 +21,7 @@ const Homesection = () => {
                         Embrace the journey. Treat each application as an opportunity to learn and grow. Refine your resume, polish your cover letter, and hone your interview skills with each experience. Every interaction is a chance to showcase your talents and demonstrate your passion.</p>
                 </div>
             </div>
+            <Accordian></Accordian>
 
         </div>
     );

@@ -40,23 +40,20 @@ const MyJob = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/del/${id}`, {
+                fetch(`https://b9a11-server-site.vercel.app/del/${id}`, {
                     method: 'PUT'
                 })
                     .then(res => {
                         if (res.status === 200) {
-                            fetch(`http://localhost:5000/myjobs/${user?.email}`, {
-                                method: 'GET'
-                            })
-                                .then(res => res.json())
-                                .then(data => setUserData(data))
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success"
-                            });
-
-
+                            axioussecure(`https://b9a11-server-site.vercel.app/myjobs/${user?.email}`)
+                                .then(res => {
+                                    setUserData(res.data)
+                                    Swal.fire({
+                                        title: "Deleted!",
+                                        text: "Your file has been deleted.",
+                                        icon: "success"
+                                    });
+                                })
                         }
                     })
                     .catch(error => console.log(error))

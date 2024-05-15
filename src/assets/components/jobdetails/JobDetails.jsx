@@ -37,9 +37,11 @@ const JobDetails = () => {
         e.preventDefault()
         const form = e.target;
         const resume = form.resume.target;
-        const deadline = new Date(data?.deadline);
+        const deadline = new Date(userData?.deadline);
         const deadtime = deadline.getTime();
         const currentTime = Date.now();
+        console.log(deadtime)
+        console.log(currentTime)
         if (currentTime < deadtime) {
             axioussecure.put(`/appliedjobs`, { job_ID: id, resume: resume, email: user?.email })
                 .then(res => {
