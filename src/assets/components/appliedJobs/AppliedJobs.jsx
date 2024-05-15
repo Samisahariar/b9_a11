@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import SingleCardJ from "./SingleCardJ";
 import { useEffect, useState } from "react";
 import useAxiousSecure from "../hooks/useAxiousSecure";
+import TableRow from "../alljobs/TableRow";
+import TableRowApplied from "./TableRowApplied";
 
 
 const fetchdata = async (params) => {
@@ -33,7 +35,7 @@ const AppliedJobs = () => {
 
     const { isPending } = useQuery({
         queryFn: async () => {
-            axioussecure(`http://localhost:5000/appliedJobPage/${email}`)
+            axioussecure(`/appliedJobPage/${email}`)
                 .then(res => {
                     setdata(res.data)
                 })
@@ -53,7 +55,7 @@ const AppliedJobs = () => {
             setfilterdata(data)
         }
     }
-    
+
     if (isPending) {
         return <div className="w-[100%] h-[100vh] flex justify-center items-center"><span className="loading loading-infinity loading-lg"></span></div>
     }
@@ -74,11 +76,26 @@ const AppliedJobs = () => {
                     </select>
                 </form>
             </div>
-            <div className=" grid md:grid-cols-2 grid-cols-1 px-[10%] gap-2">
-
-                {
-                    filterdata ? filterdata?.map((singleCard, idx) => <SingleCardJ singleCard={singleCard} key={idx}></SingleCardJ>) : data?.map((singleCard, idx) => <SingleCardJ singleCard={singleCard} key={idx}></SingleCardJ>)
-                }
+            <div className=" ">
+                <table className="table table-zebra mt-[5%]">
+                    {/* head */}
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>jobtitle</th>
+                            <th>applicant number</th>
+                            <th>deadline</th>
+                            <th>salary</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {/* row 1 */}
+                        {
+                            filterdata ? filterdata?.map((singleCard, idx) => <TableRowApplied singleCard={singleCard} key={idx} number={idx}></TableRowApplied>) : data?.map((singleCard, idx) => <TableRowApplied singleCard={singleCard} key={idx} number={idx}></TableRowApplied>)
+                        }
+                    </tbody>
+                </table>
             </div>
         </>
 

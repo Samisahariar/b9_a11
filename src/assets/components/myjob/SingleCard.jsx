@@ -36,7 +36,7 @@ const SingleCard = ({ singledatamyjob, handledelbutton }) => {
 
                 </div>
                 <div className="join join-vertical gap-1">
-                    <NavLink to={`/main/update/${_id}`}><span>View Details</span></NavLink>
+                    <NavLink to={`/main/update/${_id}`}><button className="btn text-xl"><MdEditSquare/></button></NavLink>
                     <button className="btn text-xl" onClick={() => handledelbutton(_id)}><MdDeleteForever /></button>
                     <button className="btn text-xl" /* onClick={() => tothecarddetails(_id)} */><CgDetailsMore /></button>
                 </div>
