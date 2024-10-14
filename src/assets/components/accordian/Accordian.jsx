@@ -13,8 +13,8 @@ const Accordian = () => {
             "https://i.ibb.co/kyHzRBn/photo-1601412436009-d964bd02edbc-w-500-auto-format-fit-crop-q-60-ixlib-rb-4-0.jpg"];
 
     return (
-        <div>
-            <h3 className="text-4xl text-center font-semibold mt-10">Our Best Members</h3>
+        <div className="dark:bg-gray-600 ">
+            <h3 className="text-4xl text-center font-semibold pt-10 text-black dark:text-white">Our Best <span className="dark:text-[#378CE7] text-[#80f762]">Memeber</span></h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-[8%] gap-2 mt-10">
                 {
                     itemNumber.map((single) => <SingleCard single={single}></SingleCard>)

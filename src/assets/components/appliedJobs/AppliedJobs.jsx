@@ -63,7 +63,7 @@ const AppliedJobs = () => {
 
     return (
         <>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 dark:bg-gray-600 bg-white">
                 <p className="text-xl font-semibold">Search Specific jobs : </p>
                 <form className="max-w-sm ">
                     <label className="sr-only">Underline select</label>
@@ -76,8 +76,8 @@ const AppliedJobs = () => {
                     </select>
                 </form>
             </div>
-            <div className=" ">
-                <table className="table table-zebra mt-[5%]">
+            <div className="dark:bg-gray-600">
+                <table className="table table-zebra pt-[5%]">
                     {/* head */}
                     <thead>
                         <tr>

@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import Swal from 'sweetalert2';
 import { AuthCon } from "../authcontext/AuthContext";
+import { AiFillGoogleCircle } from "react-icons/ai";
 
 const LoginPage = () => {
-    const { signIn, setUser } = useContext(AuthCon);
+    const { signIn, setUser, googlelogin } = useContext(AuthCon);
     const navigate = useNavigate();
     const [sliderRef] = useKeenSlider(
         {
@@ -45,6 +46,25 @@ const LoginPage = () => {
             }
         ]
     )
+
+    const handlethegooglelogin = () => {
+        googlelogin()
+            .then(res => {
+                setUser(res.user);
+                Swal.fire({
+                    position: "middle",
+                    icon: "success",
+                    title: "Login Successfull!!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
+            .catch(error =>{
+                alert(error.message)
+            })
+    }
+
+
 
     const handleTheLogin = (event) => {
         event.preventDefault()
@@ -83,7 +103,7 @@ const LoginPage = () => {
             <div className="keen-slider__slide number-slide2"></div>
             <div className="keen-slider__slide number-slide3"></div>
             <div className="keen-slider__slide number-slide4"></div>
-            <div className="hero-overlay bg-opacity-30 h-[100vh]  w-[100vw] absolute top-0 flex items-centergap-3 items-center justify-between px-[10%]">
+            <div className="hero-overlay bg-opacity-30 h-[100vh]  w-[100vw] absolute top-0 flex items-centergap-3 items-center justify-between px-[10%] md:flex-row flex-col">
                 <div className="bg_glossy w-[35%] p-4 rounded-xl h-[70vh] space-y-2">
                     <div className="space-y-1">
                         <h3 className="text-4xl text-white">LOG-IN</h3>
@@ -104,6 +124,10 @@ const LoginPage = () => {
                         <div className="mb-5">
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
                             <input name="password" type="password" id="password" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required />
+                        </div>
+                        <div className="mb-5">
+                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Also Login With :</label>
+                            <AiFillGoogleCircle onClick={handlethegooglelogin}/>
                         </div>
                         <div className="flex items-start mb-2">
                             <div className="flex items-center h-5">

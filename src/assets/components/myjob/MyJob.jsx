@@ -66,8 +66,8 @@ const MyJob = () => {
         return <div className="w-[100%] h-[100vh] flex justify-center items-center"><span className="loading loading-infinity loading-lg"></span></div>
     }
     return (
-        <div>
-            <table className="table table-zebra mt-[5%]">
+        <div className="dark:bg-gray-600 bg-white">
+            <table className="table table-zebra pt-20">
                 {/* head */}
                 <thead>
                     <tr>

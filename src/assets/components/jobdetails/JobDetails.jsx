@@ -68,7 +68,7 @@ const JobDetails = () => {
 
 
     return (
-        <div className="px-[10%]">
+        <div className="px-[10%] dark:bg-gray-600 dark:text-white text-black">
             <ToastContainer />
             <div className="keen-slider h-[50vh] relative">
                 <div className="third_banner"><img src={userData?.photo} alt="" className="w-[100vw] h-[50vh] bg-center" /></div>
@@ -83,15 +83,15 @@ const JobDetails = () => {
                         <h3 className="lg:text-4xl font-semibold font-dm text-2xl md:text-3xl">{userData?.jobtitle}</h3>
                     </div>
                     <div className="">
-                        <h3 className=" text-4xl font-semibold text-end font-dm">price</h3>
+                        <h3 className=" text-4xl font-semibold text-end font-dm">{userData?.salary}</h3>
                         <div className="flex gap-2">
-                            <span className="p-2 flex items-center gap-1 rounded-xl bg-white"><FaShareAlt></FaShareAlt>Share</span>
-                            <span className="p-2 flex items-center gap-1 rounded-xl bg-white"><MdFavoriteBorder></MdFavoriteBorder>Favorite</span>
-                            <span className="p-2 flex items-center gap-1 rounded-xl bg-white"><IoMdPrint></IoMdPrint>Print</span>
+                            <span className="p-2 flex items-center gap-1 rounded-xl bg-white dark:bg-gray-700 "><FaShareAlt></FaShareAlt>Share</span>
+                            <span className="p-2 flex items-center gap-1 rounded-xl bg-white dark:bg-gray-700"><MdFavoriteBorder></MdFavoriteBorder>Favorite</span>
+                            <span className="p-2 flex items-center gap-1 rounded-xl bg-white dark:bg-gray-700"><IoMdPrint></IoMdPrint>Print</span>
                         </div>
                     </div>
                 </div>
-                <div className="bg-white p-3 space-y-2 rounded-xl mt-10 shadow-xl dark:bg-base-200">
+                <div className=" p-3 space-y-2 rounded-xl mt-10 shadow-xl bg-white dark:bg-gray-700">
                     <p className="font-semibold">Overview :</p>
                     <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3">
                         <div>
@@ -108,19 +108,16 @@ const JobDetails = () => {
                         </div>
                     </div>
                 </div>
-                <div className="bg-white p-3 rounded-xl mt-10 dark:bg-base-200">
+                <div className="bg-white dark:bg-gray-700 p-3 rounded-xl mt-10 ">
                     <span className="font-semibold">Description :</span><br />
                     {userData?.description}
-                </div>
-                <div className="w-[80vw]">
-
                 </div>
             </div>
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
             <div>
-                <button className="btn" onClick={() => document.getElementById('my_modal_3').showModal()}>open modal</button>
+                <button className="btn w-full bg-gradient-to-br from-green-400 to-blue-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={() => document.getElementById('my_modal_3').showModal()}>Apply</button>
                 <dialog id="my_modal_3" className="modal">
-                    <div className="modal-box">
+                    <div className="modal-box dark:bg-gray-700">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
@@ -130,7 +127,7 @@ const JobDetails = () => {
                         <form action="" onSubmit={handlethesublit}>
                             <label className="form-control w-full max-w-xs">
                                 <div className="label">
-                                    <span className="label-text">What is your name?</span>
+                                    <span className="label-text dark:text-white text-black">Enter your Resume</span>
                                 </div>
                                 <input name="resume" type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
                             </label>

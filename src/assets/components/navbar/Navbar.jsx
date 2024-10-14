@@ -1,12 +1,18 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "../../../App.css"
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthCon } from "../authcontext/AuthContext";
 import Swal from 'sweetalert2';
+import { HeartSwitch } from '@anatoliygatt/heart-switch';
+import userNullImage from "../../images/pngwing.com.png";
+import image from "../../images/search.png"
+
+
 
 const Navbar = () => {
 
-    const { signIn, logOut, user } = useContext(AuthCon)
+    const { signIn, logOut, user } = useContext(AuthCon);
+    const [checked, setChecked] = useState(false);
 
     const navigate = useNavigate();
 
@@ -21,38 +27,44 @@ const Navbar = () => {
 
         <NavLink to="home" className={({ isActive, isPending }) =>
             isActive
-                ? "active"
-                : "inactive"
+                ? "active dark:text-[#378CE7] dark:bg-gray-600 dark:border-b-[#378CE7]"
+                : "inactive dark:text-white"
         }
         >Home</NavLink>
         <NavLink id="alljobs" to="alljobs" className={({ isActive, isPending }) =>
             isActive
-                ? "active"
-                : "inactive"
+                ? "active dark:text-[#378CE7] dark:bg-gray-600 dark:border-b-[#378CE7]"
+                : "inactive dark:text-white"
         }
         >All Jobs</NavLink>
-        <NavLink to={user ? `appliedjobs/${user.email}` : "/"} className={({ isActive, isPending }) =>
-            isActive
-                ? "active"
-                : "inactive"
+        {
+            user && <NavLink to={user ? `appliedjobs/${user.email}` : "/"} className={({ isActive, isPending }) =>
+                isActive
+                    ? "active dark:text-[#378CE7] dark:bg-gray-600 dark:border-b-[#378CE7]"
+                    : "inactive dark:text-white"
+            }
+            >Applied Jobs</NavLink>
         }
-        >Applied Jobs</NavLink>
-        <NavLink to="addajob" className={({ isActive, isPending }) =>
-            isActive
-                ? "active"
-                : "inactive"
+        {
+            user && <NavLink to="addajob" className={({ isActive, isPending }) =>
+                isActive
+                    ? "active dark:text-[#378CE7] dark:bg-gray-600 dark:border-b-[#378CE7]"
+                    : "inactive dark:text-white"
+            }
+            >Add A Job</NavLink>
         }
-        >Add A Job</NavLink>
-        <NavLink to="myjobs" className={({ isActive, isPending }) =>
-            isActive
-                ? "active"
-                : "inactive"
+        {
+            user && <NavLink to="myjobs" className={({ isActive, isPending }) =>
+                isActive
+                    ? "active dark:text-[#378CE7] dark:bg-gray-600 dark:border-b-[#378CE7]"
+                    : "inactive dark:text-white"
+            }
+            >My Jobs</NavLink>
         }
-        >My Jobs</NavLink>
         <NavLink to="blogs" className={({ isActive, isPending }) =>
             isActive
-                ? "active"
-                : "inactive"
+                ? "active dark:text-[#378CE7] dark:bg-gray-600 dark:border-b-[#378CE7]"
+                : "inactive dark:text-white"
         }
         >Blogs</NavLink>
     </>
@@ -63,7 +75,7 @@ const Navbar = () => {
                 Swal.fire({
                     position: "middle",
                     icon: "success",
-                    title: "Registration Successfull!!",
+                    title: "Log-Out Successfull!!",
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -73,9 +85,19 @@ const Navbar = () => {
             })
     }
 
+    const darkmode = (checked) => {
+        console.log(checked)
+        const thewholehtml = document.getElementById("html")
+        if (!checked) {
+            thewholehtml.classList.add("dark")
+        } else {
+            thewholehtml.classList.remove("dark")
+        }
+    }
+
 
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar dark:bg-gray-600 bg-white border-b-4 border-[#80f762] dark:border-[#378CE7]">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -85,7 +107,7 @@ const Navbar = () => {
                         {navlinks}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl"><img src="https://i.ibb.co/L5cdXC6/character-conducting-financial-audits-778780-58823.jpg" className="w-10 h-10 rounded-full" alt="" />JobMANIA</a>
+                <a className="btn btn-ghost text-xl"><img src={image} className="w-10 h-10 rounded-full" alt="" /><span className="text-black dark:text-white">Job</span><span className="dark:text-[#378CE7] text-[#80f762]">MANIA</span></a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -93,10 +115,23 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
+                <HeartSwitch
+                    size="lg"
+                    inactiveTrackFillColor="#cffafe"
+                    inactiveTrackStrokeColor="#22d3ee"
+                    activeTrackFillColor="#06b6d4"
+                    activeTrackStrokeColor="#0891b2"
+                    inactiveThumbColor="#ecfeff"
+                    activeThumbColor="#ecfeff"
+                    checked={checked}
+                    onChange={(event) => {
+                        setChecked(event.target.checked)
+                        darkmode(checked)
+                    }}></HeartSwitch>
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                            <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            <img alt="Tailwind CSS Navbar component" src={user ? "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" : userNullImage} />
                         </div>
                     </div>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
